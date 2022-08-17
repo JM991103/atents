@@ -12,8 +12,8 @@ namespace _01test
         static void Main(string[] args)
         {
             Console.WriteLine("출력");
-            string str = Console.ReadLine(); //키보드 입력을 받아서 str이라는 string변수에 저장한다.
-            Console.WriteLine(str); //str출력
+           // string str = Console.ReadLine(); //키보드 입력을 받아서 str이라는 string변수에 저장한다.
+           // Console.WriteLine(str); //str출력
 
             //변수 : 변하는 숫자. 컴퓨터에 사용할 데이터를 저장할 수 있는 곳
             //변수의 종류 : 데이터 타입(Data Type)
@@ -46,6 +46,45 @@ namespace _01test
 
             bool b1 = true;
             bool b2 = false;
+
+            int level = 1;
+            int hp = 10;
+            float exp = 0.9f;
+            string name = "너굴맨";
+
+            //너굴맨의 레벨은 1이고 HP는 10이고 exp는 0.9다.
+
+            Console.WriteLine(name + "의 레벨은 " + level + "이고 HP는 " + hp + "이고 "+ "exp는 " + exp + "다.");
+
+            string str5 = $"{name}의 레벨은 {level}이고 HP는 {hp}이고 exp는 {exp}다";
+            Console.WriteLine(str5);
+            
+            Console.WriteLine($"{name}의 레벨은 {level}이고 HP는 {hp}이고 exp는 {exp}다");
+
+            Console.Write("이름을 입력하세요 : ");
+            name = Console.ReadLine();
+            Console.Write($"{name}의 레벨을 입력하세요 : ");
+            string temp = Console.ReadLine();
+            //level = int.Parse(temp); //string을 int로 변경해주는 코드(숫자로 바꿀수 있을때만 가능) 간단하지만 위험함
+            //level = Convert.ToInt32(temp);  //string을 int로 변경해주는 코드(숫자로 바꿀수 있을때만 가능) 더 세세하게 변경할 수 있다.
+            int.TryParse(temp, out level); //string을 int로 변경해주는 코드 (숫자로 바꿀 수 없으면 0으로 만든다.)
+
+            //너굴맨의 레벨은 1이고 HP는 10이고 exp는 90%다.
+
+            exp = 0.959595f;
+            Console.WriteLine($"이름 : {name}\n레벨 : {level}\nHP : {hp}\nexp : {exp*100:f3}%"); //exp*100을 소수점 3자리까지 표시함
+
+
+            
+
+
+
+
+
+
+
+
+
 
         }
     }
