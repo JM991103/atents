@@ -1,44 +1,79 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Lifetime;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _01test
 {
     internal class Program
     {
+        //스코프(Scope) : 변수나 함수를 사용할 수 있는 범위, 변수를 선언한 시점에서 해당 변수가 포함된 중괄호가 끝나는 구간까지
         static void Main(string[] args)
         {
             //int sumResult = sum(10, 20); //break porint (단축키 F9)
             //Console.WriteLine($"SumResult : { sumResult}");
+            //print();
 
 
-            print();
+            // 1. int 타입의 파라메터를 하나 받아서 그 숫자에 해당하는 구구단을 출력해주는 함수 만들기
+            // 2. 1번에서 만드는 함수는 2~9까지 입력이 들어오면 해당 구구단 출력. 그 외의 숫자는 "잘못된 입력입니다."라고 출력
+            // 3. 메인 함수에서 숫자를 하나 입력받는 코드가 있어야 한다.
 
+            bool b1 = true;
+            bool b2 = false;
+            //논리 연산자
+            //&& (앤드, and)  둘 다 참일 때만 참이다. true && true = true  // false && false = false  //false && true = false
+            //|| (오아, or)   둘 중 하나만 참이면 참이다. true || ture = true //true || false = true //false || true = true //flase || false = false
+            // ~ (not)        true는 flase, false는 true. ~true = false
+
+            Random r = new Random();
+            r.Next();
+            
+
+
+            string num1;
+            num1 = Console.ReadLine();
+            int.TryParse(num1, out  int num2);
+
+            gugudan(num2);
+
+        } //main 함수의 끝
+
+        static void gugudan(int num2)
+        {
+            if (1 < num2 && num2 < 10) 
+            {
+                for (int j = 1; j <= 9; j++)
+                {
+                    Console.WriteLine($"{num2} * {j} = {num2 * j}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("잘못된 입력입니다.");
+            }
+        }
+
+
+        private static void test_Function()
+        {
             string name = "너굴맨";
             int level = 2;
             int hp = 10;
             int maxHP = 20;
-            float exp =0.1f;
+            float exp = 0.1f;
             float maxExp = 1.0f;
 
-            printCharacter("이름", 2, 10, 20, 0.3f, 5.5f);
 
-
-
-        } //main 함수의 끝
+            printCharacter(name, level, hp, maxHP, exp, maxExp);
+        }
 
         private static void printCharacter(string name, int level, int hp, int maxHP, float exp, float maxExp)
         {
             //실습 : 파라메터로 받은 데이터를 적당한 양식으로 출력해주는 함수 완성하기
-            Console.WriteLine($"이름 : {name}");
-            Console.WriteLine($"레벨 : {level}");
-            Console.WriteLine($"HP : {hp}");
-            Console.WriteLine($"MAXHP : {maxHP}");
-            Console.WriteLine($"EXP : {exp}");
-            Console.WriteLine($"MAXEXP : {maxExp}");
+            Console.WriteLine($"이름\t : {name}");
+            Console.WriteLine($"레벨\t : {level}");
+            Console.WriteLine($"HP\t : {hp,3}");
+            Console.WriteLine($"MAXHP\t : {maxHP,3}");
+            Console.WriteLine($"Exp\t : {exp:f3}");
+            Console.WriteLine($"MAXExp\t : {maxExp:f3}");
         }
 
         //함수의 구성요소
