@@ -30,6 +30,11 @@ namespace _01test
             Console.WriteLine("생성자 호출");
         }
 
+        public character(string newname)
+        {
+            Console.WriteLine($"생성자 호출 - {newname}");
+            name = newname;
+        }
 
         //멤버 함수 -> 이 클래스가 가지는 기능
         public void Attack()
