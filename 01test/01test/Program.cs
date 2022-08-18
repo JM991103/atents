@@ -23,32 +23,105 @@ namespace _01test
             //|| (오아, or)   둘 중 하나만 참이면 참이다. true || ture = true //true || false = true //false || true = true //flase || false = false
             // ~ (not)        true는 flase, false는 true. ~true = false
 
+            character human1 = new character(); //메모리 할당 완료(Instance화). 객체(Object) 생성 완료 (객체의 인스턴스를 만들었다.)
+            character human2 = new character(); //Character 타입으로 하나 더 만든 것. human1과 human2는 서로 다른 객체다
+
+            //human1.name = "너굴맨";
+
+            //human1.TestPrintStatus();
+            //human2.Attack();
+
+            
             Random r = new Random();
             r.Next();
-            
+            int a = r.Next();
+            int b = a % 3;
 
+            Console.WriteLine(b);
 
-            string num1;
-            num1 = Console.ReadLine();
-            int.TryParse(num1, out  int num2);
+            Console.Write("▶ 가위 바위 보");
+            Console.WriteLine("0 = 가위 / 1 = 바위 / 2 = 보");
+            string n = Console.ReadLine();
+            int.TryParse(n, out int m);
 
-            gugudan(num2);
-
-        } //main 함수의 끝
-
-        static void gugudan(int num2)
-        {
-            if (1 < num2 && num2 < 10) 
+            if (m == 0 || m == 1 || m == 2)
             {
-                for (int j = 1; j <= 9; j++)
+                switch (m)
                 {
-                    Console.WriteLine($"{num2} * {j} = {num2 * j}");
+                    case 0:
+                        Console.WriteLine("나 : 가위");
+                        break;
+                    case 1:
+                        Console.WriteLine("나 : 바위");
+                        break;
+                    case 2:
+                        Console.WriteLine("나 : 보");
+                        break;
                 }
             }
             else
             {
-                Console.WriteLine("잘못된 입력입니다.");
+                Console.Write("다시 입력해주세요.");
             }
+                switch (b)
+            {
+                case 0:
+                    Console.WriteLine("Pc : 가위");
+                    break;
+                case 1:
+                    Console.WriteLine("Pc : 바위");
+                    break;
+                case 2:
+                    Console.WriteLine("Pc : 보");
+                    break;
+            }
+            if (m == b)
+            {
+                Console.WriteLine("비겼습니다.");
+            }
+            if (m > b)
+            {
+                Console.WriteLine("졌습니다.");
+            }
+            if (m > b)
+            {
+                Console.WriteLine("이겼습니다.");
+            }
+
+
+
+
+
+        } //main 함수의 끝
+
+
+
+        private static void Test_Gugudan()
+        {
+            //string num1;
+            //num1 = Console.ReadLine();
+            //int.TryParse(num1, out int num2);
+
+            //Gugudan(num2);
+
+
+
+            //static void Gugudan(int num2)
+            //{
+            //    //<= 나 >= 는 두개의 조건이 결합된 것이므로 피하는 것이 좋다.
+            //    //if(2 <= dan && dan <= 9) // 2 <= dan      2 < dan && 2 == dan
+            //    if (1 < num2 && num2 < 10)
+            //    {
+            //        for (int j = 1; j < 10; j++)
+            //        {
+            //            Console.WriteLine($"{num2} * {j} = {num2 * j}");
+            //        }
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine("잘못된 입력입니다.");
+            //    }
+            //}
         }
 
 
