@@ -16,77 +16,123 @@ namespace _01test
             // 2. 1번에서 만드는 함수는 2~9까지 입력이 들어오면 해당 구구단 출력. 그 외의 숫자는 "잘못된 입력입니다."라고 출력
             // 3. 메인 함수에서 숫자를 하나 입력받는 코드가 있어야 한다.
 
-            bool b1 = true;
-            bool b2 = false;
-            //논리 연산자
-            //&& (앤드, and)  둘 다 참일 때만 참이다. true && true = true  // false && false = false  //false && true = false
-            //|| (오아, or)   둘 중 하나만 참이면 참이다. true || ture = true //true || false = true //false || true = true //flase || false = false
-            // ~ (not)        true는 flase, false는 true. ~true = false
+            //bool b1 = true;
+            //bool b2 = false;
+            ////논리 연산자
+            ////&& (앤드, and)  둘 다 참일 때만 참이다. true && true = true  // false && false = false  //false && true = false
+            ////|| (오아, or)   둘 중 하나만 참이면 참이다. true || ture = true //true || false = true //false || true = true //flase || false = false
+            //// ~ (not)        true는 flase, false는 true. ~true = false
 
-            character human1 = new character(); //메모리 할당 완료(Instance화). 객체(Object) 생성 완료 (객체의 인스턴스를 만들었다.)
-            character human2 = new character("개굴맨"); //Character 타입으로 하나 더 만든 것. human1과 human2는 서로 다른 객체다
+
+
+            Character human1 = new Character(); //메모리 할당 완료(Instance화). 객체(Object) 생성 완료 (객체의 인스턴스를 만들었다.)
+            Character human2 = new Character("개굴맨"); //Character 타입으로 하나 더 만든 것. human1과 human2는 서로 다른 객체다
+
+            while (true)
+            {
+                if (human1.HP <= 0 || human2.HP <= 0)
+                {
+                    break;
+                }
+                else
+                {
+                    human1.Attack(human2);
+                    human1.TestPrintStatus();
+                    human2.TestPrintStatus();
+                }
+                if (human1.HP <= 0 || human2.HP <= 0)
+                {
+                    break;
+                }
+                else
+                {
+                    human2.Attack(human1);
+                    human1.TestPrintStatus();
+                    human2.TestPrintStatus();
+                }
+            }
+
+
+
+            //Console.WriteLine($"human1.HP");
+            //human1.HP = 20;
+
 
             //human1.name = "너굴맨";
 
             //human1.TestPrintStatus();
             //human2.Attack();
 
-            
-            Random r = new Random();
-            r.Next();
-            int a = r.Next();
-            int b = a % 3;
 
-            Console.WriteLine(b);
 
-            Console.Write("▶ 가위 바위 보");
-            Console.WriteLine("0 = 가위 / 1 = 바위 / 2 = 보");
-            string n = Console.ReadLine();
-            int.TryParse(n, out int m);
 
-            if (m == 0 || m == 1 || m == 2)
-            {
-                switch (m)
-                {
-                    case 0:
-                        Console.WriteLine("나 : 가위");
-                        break;
-                    case 1:
-                        Console.WriteLine("나 : 바위");
-                        break;
-                    case 2:
-                        Console.WriteLine("나 : 보");
-                        break;
-                }
-            }
-            else
-            {
-                Console.Write("다시 입력해주세요.");
-            }
-                switch (b)
-            {
-                case 0:
-                    Console.WriteLine("Pc : 가위");
-                    break;
-                case 1:
-                    Console.WriteLine("Pc : 바위");
-                    break;
-                case 2:
-                    Console.WriteLine("Pc : 보");
-                    break;
-            }
-            if (m == b)
-            {
-                Console.WriteLine("비겼습니다.");
-            }
-            if (m > b)
-            {
-                Console.WriteLine("졌습니다.");
-            }
-            if (m > b)
-            {
-                Console.WriteLine("이겼습니다.");
-            }
+
+
+
+
+
+
+
+
+
+
+
+
+            //Random r = new Random();
+            //r.Next();
+            //int a = r.Next();
+            //int b = a % 3;
+
+            //Console.WriteLine(b);
+
+            //Console.Write("▶ 가위 바위 보");
+            //Console.WriteLine("0 = 가위 / 1 = 바위 / 2 = 보");
+            //string n = Console.ReadLine();
+            //int.TryParse(n, out int m);
+
+            //if (m == 0 || m == 1 || m == 2)
+            //{
+            //    switch (m)
+            //    {
+            //        case 0:
+            //            Console.WriteLine("나 : 가위");
+            //            break;
+            //        case 1:
+            //            Console.WriteLine("나 : 바위");
+            //            break;
+            //        case 2:
+            //            Console.WriteLine("나 : 보");
+            //            break;
+            //    }
+            //}
+            //else
+            //{
+            //    Console.Write("다시 입력해주세요.");
+            //}
+            //    switch (b)
+            //{
+            //    case 0:
+            //        Console.WriteLine("Pc : 가위");
+            //        break;
+            //    case 1:
+            //        Console.WriteLine("Pc : 바위");
+            //        break;
+            //    case 2:
+            //        Console.WriteLine("Pc : 보");
+            //        break;
+            //}
+            //if (m == b)
+            //{
+            //    Console.WriteLine("비겼습니다.");
+            //}
+            //if (m > b)
+            //{
+            //    Console.WriteLine("졌습니다.");
+            //}
+            //if (m > b)
+            //{
+            //    Console.WriteLine("이겼습니다.");
+            //}
 
 
 
