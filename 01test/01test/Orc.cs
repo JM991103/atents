@@ -3,13 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace _01test
 {
     public class Orc : Character
     {
-        int defense;
         public Orc(string newName) : base(newName)  //생성자
         {
             //Orc의 이름 출력
@@ -19,7 +19,6 @@ namespace _01test
         {
             base.GenerateStatus();
             
-
         }
 
     
@@ -38,20 +37,40 @@ namespace _01test
         {
             base.Attack(target);
             int damage = strenth;
+
+            if (target.Barrier)
+            {
+                damage = 0;
+                Console.WriteLine($"{target.Name}이(가) 공격을 방어했습니다.");
+                Console.WriteLine();
+                target.Barrier = false;
+            }
+
+            if (rand.NextDouble() < 0.3)
+            {
+                damage = OrcSkill(damage);
+            }
+
             if (rand.NextDouble() < 0.3)
             {
                 damage *= 2;
                 Console.WriteLine("크리티컬 히트!");
             }
             Console.WriteLine($"{name}이(가) {target.Name}에게 공격을 합니다.(공격력 : {damage})");
+            Console.WriteLine();
             target.TakeDamage(damage);
         }
 
 
 
-        public void OrcSkill()
+        public int OrcSkill(int damage)
         {
+            damage *= 2;
+            Console.WriteLine($"{name}이(가) Skill [분노]를 사용했습니다.");
+            Console.WriteLine($"{name}이(가) Damage가 2배가 됩니다.");
+            Console.WriteLine();
 
+            return damage;
         }
 
     }

@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 // namespace : 이름이 겹치는 것을 방지하기 위해 구분지어 놓는 용도
 namespace _01_Console
@@ -26,6 +28,19 @@ namespace _01_Console
         protected int intellegence = 7;
 
         protected bool isDead = false;
+        bool barrier = false;
+
+        public bool Barrier
+        {
+            get
+            {
+                return barrier; 
+            }
+            set
+            {
+                barrier = value;
+            }
+        }
 
         public string name2;
         public string Name => name;
@@ -67,9 +82,15 @@ namespace _01_Console
                 if (hp <= 0)
                 {
                     // 사망 처리용 함수 호출
+                    hp = 0;
                     Dead();
                 }
             }
+        }
+
+        public void HumanBarrier()
+        {
+            Barrier = true;
         }
 
         private void Dead()
@@ -88,6 +109,7 @@ namespace _01_Console
 
             GenerateStatus();
             TestPrintStatus();
+
             // 실습
             // 1. 이름이 nameArray에 들어있는 것 중 하나로 랜덤하게 선택된다.
             // 2. maxHP는 100~200 사이로 랜덤하게 선택된다.
@@ -125,13 +147,13 @@ namespace _01_Console
         // 맴버 함수 -> 이 클래스가 가지는 기능
         public virtual void Attack(Character target)
         {
-            
+  
         }
 
         public void TakeDamage(int damage)
         {
-            HP -= damage;
             Console.WriteLine($"{name}이(가) {damage}만큼의 피해를 입었습니다.");
+            HP -= damage;
         }
 
         public virtual void TestPrintStatus()

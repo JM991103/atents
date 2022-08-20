@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -22,13 +23,50 @@ namespace _01_Console
             //Test_Human();
 
             // 주말과제용
+            int num;
+
+
+
             Human player = new Human();
             Orc enemy = new Orc("오크");
 
-            //player.GenerateStatus();
-            enemy.GenerateStatus();
-            player.Attack(enemy);
-            enemy.Attack(player);
+            while (player.HP >= 0 && enemy.HP >= 0)
+            {
+                Console.WriteLine("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+                Console.WriteLine("┃        ※ 행동을 입력하세요            ┃   ");        
+                Console.WriteLine("┃    ① 공격     ② 스킬     ③ 방어     ┃   ");
+                Console.WriteLine("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+                string a = Console.ReadLine();
+                int.TryParse(a, out num);
+                switch (num)
+                {
+                    case 1:
+                        player.Attack(enemy);
+                        break;
+                    case 2:
+                        player.HumanSkill(enemy);
+                        break;
+                    case 3:
+                        player.Barrier = true;
+                        break;
+                    default:
+                        Console.WriteLine("다시 입력해주세요");
+                        break;
+                }
+                player.TestPrintStatus();
+                enemy.TestPrintStatus();
+                if (enemy.HP <= 0 )
+                {
+                    break;
+                }
+                enemy.Attack(player); //orc공격
+
+                player.TestPrintStatus();
+                enemy.TestPrintStatus();
+            }
+            
+
+
 
             Console.ReadKey();                  // 키 입력 대기하는 코드
         }   // Main 함수의 끝
