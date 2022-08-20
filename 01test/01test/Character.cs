@@ -27,6 +27,7 @@ namespace _01_Console
 
         protected bool isDead = false;
 
+        public string name2;
         public string Name => name;
         public bool IsDead => isDead;   // 간단하게 읽기전용 프로퍼티 만드는 방법
 
@@ -45,7 +46,7 @@ namespace _01_Console
         //int[] intArray; // 인티저를 여러개 가질 수 있는 배열
         //intArray = new int[5];    // 인티저를 5개 가질 수 있도록 할당
 
-        string[] nameArray = { "전사", "궁수", "마법사", "도적", "해적" }; // nameArray에 기본값 설정(선언과 할당을 동시에 처리)
+        string[] nameArray = { "전사", "궁수", "법사", "도적", "해적" }; // nameArray에 기본값 설정(선언과 할당을 동시에 처리)
 
         protected Random rand;
 
@@ -124,15 +125,13 @@ namespace _01_Console
         // 맴버 함수 -> 이 클래스가 가지는 기능
         public virtual void Attack(Character target)
         {
-            int damage = strenth;
-            Console.WriteLine($"{name}이 {target.name}에게 공격을 합니다.(공격력 : {damage})");
-            target.TakeDamage(damage);
+            
         }
 
         public void TakeDamage(int damage)
         {
             HP -= damage;
-            Console.WriteLine($"{name}이 {damage}만큼의 피해를 입었습니다.");
+            Console.WriteLine($"{name}이(가) {damage}만큼의 피해를 입었습니다.");
         }
 
         public virtual void TestPrintStatus()

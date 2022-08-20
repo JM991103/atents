@@ -13,6 +13,8 @@ namespace _01_Console
         int mp = 100;
         int maxMp = 100;
 
+ 
+
         public Human()  // 상속받은 부모의 생성자도 같이 실행
         {
             //GenerateStatus();
@@ -28,6 +30,7 @@ namespace _01_Console
 
         public override void TestPrintStatus()
         {
+            
             Console.WriteLine("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
             Console.WriteLine($"┃ 이름\t:{name,10}              ┃ ");
             Console.WriteLine($"┃ HP\t:{hp,4} / {maxHP,4}               ┃ ");
@@ -40,6 +43,7 @@ namespace _01_Console
 
         public override void Attack(Character target)
         {
+            base.Attack(target);
             int damage = strenth;
 
             //rand.NextDouble();  // 0.0 ~ 1.0
@@ -48,9 +52,13 @@ namespace _01_Console
                 damage *= 2;    // damage = damage * 2;
                 Console.WriteLine("크리티컬 히트!");
             }
-
-            Console.WriteLine($"{name}이 {target.Name}에게 공격을 합니다.(공격력 : {damage})");
+            Console.WriteLine($"{name}이(가) {target.Name}에게 공격을 합니다.(공격력 : {damage})");
             target.TakeDamage(damage);
+            if (rand.NextDouble() < 0.3)
+            {
+                damage = 0;
+                Console.WriteLine($"{name}이(가) 공격을 막았습니다.");
+            }
         }
     }
 }

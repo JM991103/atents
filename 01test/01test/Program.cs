@@ -23,8 +23,12 @@ namespace _01_Console
 
             // 주말과제용
             Human player = new Human();
-            Orc enemy = new Orc();
+            Orc enemy = new Orc("오크");
 
+            //player.GenerateStatus();
+            enemy.GenerateStatus();
+            player.Attack(enemy);
+            enemy.Attack(player);
 
             Console.ReadKey();                  // 키 입력 대기하는 코드
         }   // Main 함수의 끝
