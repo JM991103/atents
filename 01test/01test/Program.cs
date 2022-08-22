@@ -51,7 +51,7 @@ namespace _01_Console
                         break;
                     default:
                         Console.WriteLine("다시 입력해주세요");
-                        break;
+                        continue;
                 }
                 player.TestPrintStatus();
                 enemy.TestPrintStatus();
@@ -59,7 +59,7 @@ namespace _01_Console
                 {
                     break;
                 }
-                enemy.Attack(player); //orc공격
+                enemy.Attack(player);       //orc공격
 
                 player.TestPrintStatus();
                 enemy.TestPrintStatus();

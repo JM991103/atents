@@ -67,7 +67,7 @@ namespace _01_Console
 
         public int HP
         {
-            get // 이 프로퍼티를 읽을 때 호출되는 부분. get만 만들면 읽기 전용 같은 효과가 있다.
+            get          // 이 프로퍼티를 읽을 때 호출되는 부분. get만 만들면 읽기 전용 같은 효과가 있다.
             {
                 return hp;
             }
@@ -103,20 +103,13 @@ namespace _01_Console
         {
             //Console.WriteLine("생성자 호출");
             rand = new Random(DateTime.Now.Millisecond);
-            int randomNumber = rand.Next(); // 랜덤 클래스 이용해서 0~21억 사이의 숫자를 랜덤으로 선택
-            randomNumber %= 5;  //randomNumber = randomNumber % 5;  // 랜덤으로 고른 숫자를 0~4로 변경
-            name = nameArray[randomNumber]; // 0~4로 변경한 값을 인덱스로 사용하여 이름 배열에서 이름 선택
+            int randomNumber = rand.Next();      // 랜덤 클래스 이용해서 0~21억 사이의 숫자를 랜덤으로 선택
+            randomNumber %= 5;                   //randomNumber = randomNumber % 5;  // 랜덤으로 고른 숫자를 0~4로 변경
+            name = nameArray[randomNumber];      // 0~4로 변경한 값을 인덱스로 사용하여 이름 배열에서 이름 선택
 
             GenerateStatus();
             TestPrintStatus();
 
-            // 실습
-            // 1. 이름이 nameArray에 들어있는 것 중 하나로 랜덤하게 선택된다.
-            // 2. maxHP는 100~200 사이로 랜덤하게 선택된다.
-            // 3. hp는 maxHP와 같은 값이다.
-            // 4. strenth, dexterity, intellegence은 1~20 사이로 랜덤하게 정해진다.
-            // 5. TestPrintStatus 함수를 이용해서 최종 상태를 출력한다.
-            // 시간 : 1시 20분 -> 1시 50분
         }
 
         public Character(string newName)

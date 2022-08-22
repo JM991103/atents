@@ -23,8 +23,8 @@ namespace _01_Console
 
         public override void GenerateStatus()
         {
-            base.GenerateStatus();  // Character의 GenerateStatus 함수 실행
-            maxMp = rand.Next() % 100;  // 추가한 변수만 추가로 처리
+            base.GenerateStatus();        // Character의 GenerateStatus 함수 실행
+            maxMp = rand.Next() % 100;    // 추가한 변수만 추가로 처리
             mp = maxMp;
         }
 

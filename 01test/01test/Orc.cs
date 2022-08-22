@@ -43,11 +43,6 @@ namespace _01test
                 damage = OrcSkill(damage);
             }
 
-            if (rand.NextDouble() < 0.3)
-            {
-                damage *= 2;
-                Console.WriteLine("크리티컬 히트!");
-            }
 
             if (target.Barrier)
             {
@@ -55,6 +50,12 @@ namespace _01test
                 Console.WriteLine($"{target.Name}이(가) 공격을 방어했습니다.");
                 Console.WriteLine();
                 target.Barrier = false;
+            }
+            
+            if (rand.NextDouble() < 0.3)
+            {
+                damage *= 2;
+                Console.WriteLine("크리티컬 히트!");
             }
 
             Console.WriteLine($"{name}이(가) {target.Name}에게 공격을 합니다.(공격력 : {damage})");
