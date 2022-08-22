@@ -95,7 +95,7 @@ namespace _01_Console
 
         private void Dead()
         {
-            Console.WriteLine($"{name}이 사망");
+            Console.WriteLine($"{name}이(가) 사망");
             isDead = true;
         }
 
