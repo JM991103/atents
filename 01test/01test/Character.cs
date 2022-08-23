@@ -143,7 +143,7 @@ namespace _01_Console
   
         }
 
-        public void TakeDamage(int damage)
+        public virtual void TakeDamage(int damage)
         {
             Console.WriteLine($"{name}이(가) {damage}만큼의 피해를 입었습니다.");
             HP -= damage;

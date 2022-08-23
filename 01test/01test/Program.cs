@@ -23,22 +23,40 @@ namespace _01_Console
             //Test_Human();
 
             // 주말과제용
-            int num;
+            //int num;
 
 
 
-            Human player = new Human();
-            Orc enemy = new Orc("오크");
 
-            while (player.HP >= 0 && enemy.HP >= 0)
+            Human player;
+            string result;
+            do
             {
-                Console.WriteLine("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-                Console.WriteLine("┃        ※ 행동을 입력하세요            ┃   ");        
-                Console.WriteLine("┃    ① 공격     ② 스킬     ③ 방어     ┃   ");
-                Console.WriteLine("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
-                string a = Console.ReadLine();
-                int.TryParse(a, out num);
-                switch (num)
+                Console.Write("용사님의 이름을 입력해 주세요 : ");
+                string name = Console.ReadLine();
+                player = new Human(name);
+                Console.WriteLine("이대로 진행하시겠습니까? (Yes / No)");
+                result = Console.ReadLine();
+            } while (result != "yes" && result != "Yes" && result != "y" && result != "Y");
+            //while(!(result == "yes" ||result == "Yes" ||result == "y" ||result == "Y" ||))
+
+            Orc enemy = new Orc("오크");
+            Console.WriteLine($"{enemy.Name}가 나타났다.");
+
+            Console.WriteLine("\n\n--------------------전투시작--------------------\n\n");
+
+
+            while(true)
+            {
+                int selection = 0;
+                do
+                {
+                    Console.WriteLine("행동을 선택하세요 1.공격 2.스킬 3.방어");
+                    string temp = Console.ReadLine();
+                    int.TryParse(temp, out selection);
+                } while (selection < 1|| selection > 3);
+
+                switch (selection)
                 {
                     case 1:
                         player.Attack(enemy);
@@ -47,23 +65,72 @@ namespace _01_Console
                         player.HumanSkill(enemy);
                         break;
                     case 3:
-                        player.Barrier = true;
+                        player.Defense();
                         break;
                     default:
-                        Console.WriteLine("다시 입력해주세요");
-                        continue;
+                        break;
                 }
-                player.TestPrintStatus();
-                enemy.TestPrintStatus();
-                if (enemy.HP <= 0 )
-                {
-                    break;
-                }
-                enemy.Attack(player);       //orc공격
 
                 player.TestPrintStatus();
                 enemy.TestPrintStatus();
+                if (enemy.IsDead)
+                {
+                    Console.WriteLine("승리!");
+                    break;
+                }
+                enemy.Attack(player);
+                player.TestPrintStatus();
+                enemy.TestPrintStatus();
+                if (player.IsDead)
+                {
+                    Console.WriteLine("패배");
+                    break;
+                }
             }
+
+
+
+
+
+
+
+            //Human player = new Human();
+            //Orc enemy = new Orc("오크");
+
+            //while (player.HP >= 0 && enemy.HP >= 0)
+            //{
+            //    Console.WriteLine("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+            //    Console.WriteLine("┃        ※ 행동을 입력하세요            ┃   ");        
+            //    Console.WriteLine("┃    ① 공격     ② 스킬     ③ 방어     ┃   ");
+            //    Console.WriteLine("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+            //    string a = Console.ReadLine();
+            //    int.TryParse(a, out num);
+            //    switch (num)
+            //    {
+            //        case 1:
+            //            player.Attack(enemy);
+            //            break;
+            //        case 2:
+            //            player.HumanSkill(enemy);
+            //            break;
+            //        case 3:
+            //            player.Barrier = true;
+            //            break;
+            //        default:
+            //            Console.WriteLine("다시 입력해주세요");
+            //            continue;
+            //    }
+            //    player.TestPrintStatus();
+            //    enemy.TestPrintStatus();
+            //    if (enemy.HP <= 0 )
+            //    {
+            //        break;
+            //    }
+            //    enemy.Attack(player);       //orc공격
+
+            //    player.TestPrintStatus();
+            //    enemy.TestPrintStatus();
+            //}
             
 
 
