@@ -30,22 +30,6 @@ namespace _01_Console
         protected bool isDead = false;
         bool barrier = false;
 
-        public bool Barrier
-        {
-            get
-            {
-                return barrier; 
-            }
-            set
-            {
-                barrier = value;
-            }
-        }
-
-        public string name2;
-        public string Name => name;
-        public bool IsDead => isDead;   // 간단하게 읽기전용 프로퍼티 만드는 방법
-
         //Random random = new Random();
         //for (int i = 0; i < 100; i++)
         //{
@@ -61,9 +45,25 @@ namespace _01_Console
         //int[] intArray; // 인티저를 여러개 가질 수 있는 배열
         //intArray = new int[5];    // 인티저를 5개 가질 수 있도록 할당
 
-        string[] nameArray = { "전사", "궁수", "법사", "도적", "해적" }; // nameArray에 기본값 설정(선언과 할당을 동시에 처리)
-
         protected Random rand;
+
+        private string[] nameArray = { "전사", "궁수", "법사", "도적", "해적" }; // nameArray에 기본값 설정(선언과 할당을 동시에 처리)
+
+        //프로퍼티들
+        public string Name => name;
+        public bool IsDead => isDead;   // 간단하게 읽기전용 프로퍼티 만드는 방법
+
+        public bool Barrier
+        {
+            get
+            {
+                return barrier; 
+            }
+            set
+            {
+                barrier = value;
+            }
+        }
 
         public int HP
         {
@@ -75,17 +75,27 @@ namespace _01_Console
             private set // 이 프로퍼티에 값을 넣을 때 호출되는 부분. set에 private을 붙이면 쓰는 것은 나만 가능하다.
             {
                 hp = value;
-                if (hp > maxHP)
+                if (hp > maxHP) //hp에 값이 들어갈때 최대치가 넘으면 최대치로 설정
                 {
                     hp = maxHP;
                 }
-                if (hp <= 0)
+                if (hp <= 0)    //hp가 0보다 작으면 사망처리
                 {
                     // 사망 처리용 함수 호출
                     hp = 0;
-                    Dead();
+                    Dead(); //Dead함수 호출
                 }
             }
+        }
+
+
+        /// <summary>
+        /// 사망 처리용 함수
+        /// </summary>
+        private void Dead()
+        {
+            Console.WriteLine($"{name}이(가) 사망");
+            isDead = true;
         }
 
         public void HumanBarrier()
@@ -93,35 +103,37 @@ namespace _01_Console
             Barrier = true;
         }
 
-        private void Dead()
-        {
-            Console.WriteLine($"{name}이(가) 사망");
-            isDead = true;
-        }
-
+        //<summary>
+        //기본 생성자
+        //</summary>
         public Character()
         {
             //Console.WriteLine("생성자 호출");
-            rand = new Random(DateTime.Now.Millisecond);
+            rand = new Random(DateTime.Now.Millisecond);    //랜덤 클래스 시드값 설정.
             int randomNumber = rand.Next();      // 랜덤 클래스 이용해서 0~21억 사이의 숫자를 랜덤으로 선택
             randomNumber %= 5;                   //randomNumber = randomNumber % 5;  // 랜덤으로 고른 숫자를 0~4로 변경
             name = nameArray[randomNumber];      // 0~4로 변경한 값을 인덱스로 사용하여 이름 배열에서 이름 선택
 
-            GenerateStatus();
-            TestPrintStatus();
-
+            GenerateStatus();   //스테이터스 랜덤으로 설정
+            TestPrintStatus();  //설정한 내용 출력하기
         }
 
-        public Character(string newName)
+
+        //<summary>
+        //생성자
+        //</summary>
+        // name="newName > Character의 이름
+        public Character(string newName)    
         {
             //Console.WriteLine($"생성자 호출 - {newName}");
             rand = new Random(DateTime.Now.Millisecond);
-            name = newName;
+            name = newName; //이름은 파라메터로 입력 받은 것을 사용
 
-            GenerateStatus();
-            TestPrintStatus();
+            GenerateStatus();   //스테이터스 랜덤으로 설정
+            TestPrintStatus();  //설정한 내용 출력하기
         }
 
+        //스테이터스를 랜덤으로 설정해주는 함수
         public virtual void GenerateStatus()
         {
             maxHP = rand.Next(100, 201);    // 100에서 200 중에 랜덤으로 선택
@@ -138,17 +150,29 @@ namespace _01_Console
         //}
 
         // 맴버 함수 -> 이 클래스가 가지는 기능
+
+        //target을 공격하는 함수
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="target">공격 대상</param>
         public virtual void Attack(Character target)
         {
-  
+            
         }
-
+        /// <summary>
+        /// 데미지를 받는 함수
+        /// </summary>
+        /// <param name="damage">받은 순수 데미지</param>
         public virtual void TakeDamage(int damage)
         {
             Console.WriteLine($"{name}이(가) {damage}만큼의 피해를 입었습니다.");
             HP -= damage;
         }
 
+        /// <summary>
+        /// 스테이터스창 출력
+        /// </summary>
         public virtual void TestPrintStatus()
         {
             Console.WriteLine("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
@@ -159,5 +183,6 @@ namespace _01_Console
             Console.WriteLine($"┃ 지능\t:\t{intellegence,2}");
             Console.WriteLine("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
         }
+
     }
 }
