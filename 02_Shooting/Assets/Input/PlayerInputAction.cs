@@ -44,6 +44,15 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Booster"",
+                    ""type"": ""Button"",
+                    ""id"": ""288dacda-74d0-426a-a012-d9db1bfaf436"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -112,6 +121,17 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5e45634e-2b6a-4714-a4ee-732ab1cbe2bb"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Booster"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -134,6 +154,7 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
         m_player = asset.FindActionMap("player", throwIfNotFound: true);
         m_player_Move = m_player.FindAction("Move", throwIfNotFound: true);
         m_player_Fire = m_player.FindAction("Fire", throwIfNotFound: true);
+        m_player_Booster = m_player.FindAction("Booster", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -195,12 +216,14 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_player_Move;
     private readonly InputAction m_player_Fire;
+    private readonly InputAction m_player_Booster;
     public struct PlayerActions
     {
         private @PlayerInputAction m_Wrapper;
         public PlayerActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_player_Move;
         public InputAction @Fire => m_Wrapper.m_player_Fire;
+        public InputAction @Booster => m_Wrapper.m_player_Booster;
         public InputActionMap Get() { return m_Wrapper.m_player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -216,6 +239,9 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @Fire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
                 @Fire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
                 @Fire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                @Booster.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBooster;
+                @Booster.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBooster;
+                @Booster.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBooster;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -226,6 +252,9 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
                 @Fire.started += instance.OnFire;
                 @Fire.performed += instance.OnFire;
                 @Fire.canceled += instance.OnFire;
+                @Booster.started += instance.OnBooster;
+                @Booster.performed += instance.OnBooster;
+                @Booster.canceled += instance.OnBooster;
             }
         }
     }
@@ -243,5 +272,6 @@ public partial class @PlayerInputAction : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnBooster(InputAction.CallbackContext context);
     }
 }

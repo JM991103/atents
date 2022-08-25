@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour
 
     public float speed = 1.0f;      // player의 이동 속도(초당 이동 속도)
     Vector3 dir;                    // 이동 방향(입력에 따라 변경됨)
+    float boost = 1.0f;
 
     Rigidbody2D rigid;
 
@@ -42,6 +44,8 @@ public class Player : MonoBehaviour
         inputActions.player.Move.performed += OnMove;   //performed 일 때 OnMove 함수 실행하도록 연결
         inputActions.player.Move.canceled += OnMove;    //canceled 일 때 OnMove 함수 실행하도록 연결
         inputActions.player.Fire.performed += OnFire;
+        inputActions.player.Booster.performed += OnBooster;
+        inputActions.player.Booster.canceled += OffBooster;
     }
 
     /// <summary>
@@ -49,6 +53,7 @@ public class Player : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
+        inputActions.player.Booster.performed -= OnBooster;
         inputActions.player.Fire.performed -= OnFire;
         inputActions.player.Move.performed -= OnMove; //연결해 놓은 함수 해제(안전을 위해)
         inputActions.player.Move.canceled -= OnMove;  
@@ -84,7 +89,8 @@ public class Player : MonoBehaviour
         //Rigidbody2D rigid = GetComponent<Rigidbody2D>();    
 
         //rigid.AddForce(speed * Time.fixedDeltaTime * dir); //관성이 있는 움직임을 할 때 유용함
-        rigid.MovePosition(transform.position + speed * dir * Time.fixedDeltaTime);
+        rigid.MovePosition(transform.position + (boost * speed) * dir * Time.fixedDeltaTime); //관성이 없는 움직임을 처리할 때 유요함
+
     }
 
     private void OnMove(InputAction.CallbackContext context)
@@ -101,4 +107,15 @@ public class Player : MonoBehaviour
     {
         Debug.Log("발사");
     }
+
+    private void OnBooster(InputAction.CallbackContext context)
+    {
+        boost *= 2.0f;
+    }
+
+    private void OffBooster(InputAction.CallbackContext obj)
+    {
+        boost = 1.0f;
+    }
+
 }
