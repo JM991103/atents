@@ -1,4 +1,4 @@
-using System;
+//using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     PlayerInputAction inputActions;
     // Awake -> OnEnable -> start : 대체적으로 이 순서
 
+    public GameObject Bullet;
     public float speed = 1.0f;      // player의 이동 속도(초당 이동 속도)
     Vector3 dir;                    // 이동 방향(입력에 따라 변경됨)
     float boost = 1.0f;
@@ -95,6 +96,31 @@ public class Player : MonoBehaviour
 
     }
 
+    private void OnCollisionEnter2D(Collision2D collision) 
+    {   
+        Debug.Log("OnCollisionEnter2D");    //collider와 부딪쳤을 때 실행
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        Debug.Log("OnCollisionStay2D");     // collider와 계속 접촉하면서 움직일 때(매 프레임마다 호출)
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        Debug.Log("OnCollisionExit2D");     // collider와 접촉이 떨어지는 순간 실행
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("OnTriggerEnter2D");      // trigger에 들어갔을때 실행
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        Debug.Log("OnTriggerStay2D");       // trigger와 계속 겹쳐있으면서 움직일 때 (매 프레임마다 호출)
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Debug.Log("OnTriggerExit2D");       // trigger에서 나갔을 때 실행
+    }
+
     private void OnMove(InputAction.CallbackContext context)
     {
         //Exception : 예외 상황(무엇을 해야 할지 지정이 안되어있는 예외 일때(코드가 짜여지지 않은 상황))
@@ -111,7 +137,10 @@ public class Player : MonoBehaviour
 
     public void OnFire(InputAction.CallbackContext context)
     {
-        Debug.Log("발사");
+        //Debug.Log("발사");
+        float value = UnityEngine.Random.Range(0.0f, 10.0f);   //value는 0.0 ~ 10.0사이의 랜덤값이 들어간다.
+        //UnityEngine를 사용하지 않으면 Using System;을 지워야함
+        Instantiate(Bullet, transform.position, Quaternion.identity);
     }
 
     private void OnBooster(InputAction.CallbackContext context)
