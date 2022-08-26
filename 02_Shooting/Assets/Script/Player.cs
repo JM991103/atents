@@ -28,6 +28,8 @@ public class Player : MonoBehaviour
     Rigidbody2D rigid;
     Animator anim;
 
+
+
     /// <summary>
     /// 이 스크립트가 들어있는 게임 오브젝트가 생성된 직후에 호출
     /// </summary>
@@ -96,8 +98,9 @@ public class Player : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) 
-    {   
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
         Debug.Log("OnCollisionEnter2D");    //collider와 부딪쳤을 때 실행
     }
     private void OnCollisionStay2D(Collision2D collision)
